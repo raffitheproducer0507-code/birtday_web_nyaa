@@ -1,209 +1,113 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Happy Birthday Eli 💖</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Eli 💖</title>
+    <link rel="stylesheet" href="https://public.codepenassets.com/css/reset-2.0.min.css">
+    
+    <style>
+        /* --- CSS DARI style.css --- */
+        @import url(https://fonts.googleapis.com/css?family=Lato:300italic);
+        html, body { width: 100%; height: 100%; }
+        body { background: #ffc0cb; overflow-x: hidden; }
 
-<style>
-:root {
-  --pink-main:#ff4d6d;
-  --pink-soft:#ff8fab;
-  --bg-grad:linear-gradient(135deg,#ffc1d9,#ffe4ec);
-}
+        #confetti-container {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; overflow: hidden; z-index: 9999;
+        }
 
-* { box-sizing:border-box; font-family:Arial,sans-serif; }
-body {
-  margin:0;
-  background:var(--bg-grad);
-  min-height:100vh;
-  overflow:hidden;
-}
+        #cake { display: block; position: relative; margin: -10em auto 0 auto; }
 
-/* SECTION CONTROL */
-section {
-  display:none;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:30px 20px;
-  width:100%;
-  min-height:100vh;
-}
-section.active { display:flex; }
+        .candle {
+            background: #ffffff; border-radius: 10px; position: absolute;
+            top: 228px; left: 50%; margin-left: -5px; width: 10px; height: 70px;
+            transform: translateY(-300px);
+            animation: candleIn 500ms 6s ease-out forwards;
+        }
 
-/* OPENING */
-.opening h1 {
-  font-size:2.4rem;
-  color:var(--pink-main);
-}
-.gift-img {
-  width:180px;
-  cursor:pointer;
-  animation:float 2.5s ease-in-out infinite;
-}
-@keyframes float {
-  50% { transform:translateY(-15px); }
-}
+        .fire {
+            border-radius: 100%; position: absolute; top: -20px; left: 50%;
+            margin-left: -2.6px; width: 6.6px; height: 18px;
+            background: rgba(254, 248, 97, 0.5);
+            animation: fireAnim 1s infinite;
+        }
 
-/* BUTTON */
-button {
-  padding:18px;
-  border-radius:50px;
-  border:none;
-  background:var(--pink-soft);
-  color:#fff;
-  font-size:1.2rem;
-  font-weight:800;
-  max-width:400px;
-  width:100%;
-  margin-top:15px;
-}
-.btn-main { background:var(--pink-main); }
+        @keyframes fireAnim {
+            0%, 100% { transform: scale(1); background: orange; }
+            50% { transform: scale(1.2) translateY(-5px); background: yellow; }
+        }
 
-/* GAME */
-.grid {
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:10px;
-  max-width:400px;
-}
-.cell {
-  aspect-ratio:1;
-  background:#fff;
-  border-radius:10px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:1.5rem;
-}
+        @keyframes candleIn { to { transform: translateY(0); } }
 
-/* SURAT */
-.photo {
-  width:220px;
-  height:220px;
-  border-radius:50%;
-  border:8px solid white;
-  object-fit:cover;
-}
-#surat-box {
-  background:white;
-  padding:25px;
-  border-radius:25px;
-  max-width:520px;
-}
-#surat-text {
-  text-align:left;
-  font-size:1.2rem;
-  line-height:1.8;
-}
-</style>
+        .text { text-align: center; margin-top: 20px; }
+        .typewriter {
+            font-family: 'Brush Script MT', cursive; font-size: 2.5rem; color: #d63384;
+            overflow: hidden; border-right: 3px solid #d63384; white-space: nowrap;
+            margin: 0 auto; display: inline-block;
+            animation: typing 2.5s steps(30, end) 6.5s forwards, blink .7s infinite;
+            width: 0; /* Mulai dari 0 untuk efek ngetik */
+        }
+
+        @keyframes typing { from { width: 0; } to { width: 100%; } }
+        @keyframes blink { 50% { border-color: transparent; } }
+    </style>
 </head>
-
 <body>
 
-<audio id="bgm" src="sky.mp3" loop></audio>
-<audio id="typingSound" src="typing.mp3"></audio>
+    <div id="confetti-container"></div>
 
-<!-- OPENING -->
-<section id="opening" class="active opening">
-  <img src="gift.png" class="gift-img" onclick="enterMain()">
-  <h1>TAP KADO NYA 💖</h1>
-</section>
+    <div class="candle"><div class="fire"></div></div>
 
-<!-- MAIN APP -->
-<section id="menu">
-  <h1>Happy Birthday Eli 🎂</h1>
-  <p>Ada kejutan kecil buat kamu hari ini...</p>
-  <button class="btn-main" onclick="showPage('feel')">🎁 Buka Hadiah</button>
-  <button onclick="startGame()">💣 Main Game</button>
-</section>
+    <svg id="cake" version="1.1" x="0px" y="0px" width="200px" height="500px" viewBox="0 0 200 500">
+        <rect x="30" y="250" width="140" height="80" fill="#a88679">
+            <animate attributeName="height" from="0" to="80" dur="2s" fill="freeze" />
+        </rect>
+        <rect x="50" y="200" width="100" height="50" fill="#f3e5ab">
+            <animate attributeName="height" from="0" to="50" begin="2s" dur="2s" fill="freeze" />
+        </rect>
+    </svg>
 
-<section id="feel">
-  <h1>Halo Eli 🤍</h1>
-  <p>Hari ini kamu ngerasa disayang gak?</p>
-  <button class="btn-main" onclick="showGift()">💖 Iya</button>
-  <button onclick="showGift()">🤍 Belum</button>
-</section>
+    <div class="text">
+        <h1 class="typewriter">Happy Birthday Eli! 💖</h1>
+    </div>
 
-<section id="game">
-  <h1>Hati-hati 💣</h1>
-  <div class="grid" id="bombGrid"></div>
-</section>
+    <script>
+        window.addEventListener('load', () => {
+            // Jalankan confetti setelah semua animasi kue & teks selesai (8 detik)
+            setTimeout(() => {
+                startConfetti();
+            }, 8000); 
+        });
 
-<section id="gift">
-  <img src="eli.jpg" class="photo">
-  <div id="surat-box"><div id="surat-text"></div></div>
-  <button class="btn-main" onclick="waClose()">Boleh aku nemenin kamu? 🤍</button>
-</section>
+        function startConfetti() {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#f2d74e', '#95c3de', '#ff9a91', '#a4ffc4', '#ffffff'];
 
-<script>
-const bgm = document.getElementById("bgm");
-const typingSound = document.getElementById("typingSound");
-const nomorWA = "6283129486122";
+            for (let i = 0; i < 150; i++) {
+                const dot = document.createElement('div');
+                const size = Math.random() * 8 + 4;
+                dot.style.position = 'absolute';
+                dot.style.width = size + 'px';
+                dot.style.height = size + 'px';
+                dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+                dot.style.top = '-20px';
+                dot.style.left = Math.random() * 100 + 'vw';
+                dot.style.borderRadius = '50%';
+                dot.style.opacity = Math.random();
+                dot.style.animation = `confettiFall ${Math.random() * 3 + 2}s linear forwards`;
+                container.appendChild(dot);
+            }
+        }
 
-function enterMain(){
-  bgm.volume = .4;
-  bgm.play().catch(()=>{});
-  document.getElementById("opening").classList.remove("active");
-  showPage("menu");
-}
-
-function showPage(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-}
-
-function startGame(){
-  showPage("game");
-  const grid = document.getElementById("bombGrid");
-  grid.innerHTML="";
-  const bomb = Math.floor(Math.random()*25);
-
-  for(let i=0;i<25;i++){
-    const c=document.createElement("div");
-    c.className="cell";
-    c.onclick=()=>{
-      if(i===bomb){
-        c.textContent="💣";
-        setTimeout(()=>location.href=`https://wa.me/${nomorWA}`,500);
-      } else {
-        c.textContent="💖";
-      }
-    };
-    grid.appendChild(c);
-  }
-}
-
-function showGift(){
-  showPage("gift");
-  const text=`Selamat ulang tahun Eli 🤍
-
-Terima kasih sudah ada.
-Aku bener-bener sayang kamu.`;
-  type(text,50);
-}
-
-function type(text,speed){
-  const el=document.getElementById("surat-text");
-  el.innerHTML="";
-  let i=0;
-  function run(){
-    if(i<text.length){
-      el.innerHTML+=text[i]==="\n"?"<br>":text[i];
-      typingSound.currentTime=0;
-      typingSound.play().catch(()=>{});
-      i++; setTimeout(run,speed);
-    }
-  }
-  run();
-}
-
-function waClose(){
-  location.href=`https://wa.me/${nomorWA}?text=Boleh 🤍`;
-}
-</script>
-
+        // Tambahkan style animasi jatuh secara dinamis
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes confettiFall {
+                to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    </script>
 </body>
 </html>
