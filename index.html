@@ -7,172 +7,96 @@
 
 <style>
 :root {
-  --pink-main: #ff4d6d;
-  --pink-soft: #ff8fab;
-  --bg-grad: linear-gradient(135deg, #ffc1d9, #ffe4ec);
+  --pink-main:#ff4d6d;
+  --pink-soft:#ff8fab;
+  --bg-grad:linear-gradient(135deg,#ffc1d9,#ffe4ec);
 }
 
-* {
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-  -webkit-tap-highlight-color: transparent;
-}
-
+* { box-sizing:border-box; font-family:Arial,sans-serif; }
 body {
-  margin: 0;
-  background: var(--bg-grad);
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-  width: 100vw;
-  overflow-x: hidden;
+  margin:0;
+  background:var(--bg-grad);
+  min-height:100vh;
+  overflow:hidden;
 }
 
-/* PAGE */
+/* SECTION CONTROL */
 section {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 30px 20px;
-  width: 100%;
-  min-height: 100vh;
-  animation: fadeIn .5s ease;
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:30px 20px;
+  width:100%;
+  min-height:100vh;
 }
+section.active { display:flex; }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: none; }
+/* OPENING */
+.opening h1 {
+  font-size:2.4rem;
+  color:var(--pink-main);
 }
-
-/* TEXT */
-h1 {
-  color: var(--pink-main);
-  font-size: 2.4rem;
-  margin-bottom: 16px;
-  text-shadow: 2px 2px 0 white;
+.gift-img {
+  width:180px;
+  cursor:pointer;
+  animation:float 2.5s ease-in-out infinite;
 }
-
-p {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #444;
-  line-height: 1.4;
+@keyframes float {
+  50% { transform:translateY(-15px); }
 }
 
 /* BUTTON */
 button {
-  padding: 20px;
-  border-radius: 50px;
-  border: none;
-  background: var(--pink-soft);
-  color: #fff;
-  font-weight: 800;
-  font-size: 1.3rem;
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 14px;
-  box-shadow: 0 5px 15px rgba(255,143,171,.4);
-  cursor: pointer;
+  padding:18px;
+  border-radius:50px;
+  border:none;
+  background:var(--pink-soft);
+  color:#fff;
+  font-size:1.2rem;
+  font-weight:800;
+  max-width:400px;
+  width:100%;
+  margin-top:15px;
 }
-
-button:active { transform: scale(.95); }
-.btn-main { background: var(--pink-main); }
-
-/* GIFT IMAGE */
-.gift-img {
-  width: 180px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  animation: floatGift 2.5s ease-in-out infinite;
-  transition: transform .3s ease;
-  filter: drop-shadow(0 10px 20px rgba(255, 77, 109, 0.4));
-}
-
-.gift-img:hover {
-  transform: scale(1.08);
-}
-
-@keyframes floatGift {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-  100% { transform: translateY(0); }
-}
+.btn-main { background:var(--pink-main); }
 
 /* GAME */
 .grid {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(5, 1fr);
-  margin: 20px 0;
-  width: 100%;
-  max-width: 400px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  max-width:400px;
 }
-
 .cell {
-  aspect-ratio: 1;
-  background: #fff;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  box-shadow: 0 4px 0 #ddd;
+  aspect-ratio:1;
+  background:#fff;
+  border-radius:10px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:1.5rem;
 }
 
-/* GIFT PAGE */
+/* SURAT */
 .photo {
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  border: 8px solid #fff;
-  object-fit: cover;
-  margin-bottom: 20px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  border:8px solid white;
+  object-fit:cover;
 }
-
 #surat-box {
-  background: rgba(255,255,255,.95);
-  padding: 26px;
-  border-radius: 25px;
-  max-width: 520px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  background:white;
+  padding:25px;
+  border-radius:25px;
+  max-width:520px;
 }
-
 #surat-text {
-  text-align: left;
-  line-height: 1.8;
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #333;
-}
-
-/* GALLERY */
-#memories-btn {
-  display: none;
-  background: #6a0572;
-  margin-top: 10px;
-}
-
-.overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.9);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-}
-
-.overlay img {
-  max-width: 90%;
-  max-height: 80%;
-  border: 5px solid white;
-  border-radius: 10px;
+  text-align:left;
+  font-size:1.2rem;
+  line-height:1.8;
 }
 </style>
 </head>
@@ -182,96 +106,70 @@ button:active { transform: scale(.95); }
 <audio id="bgm" src="sky.mp3" loop></audio>
 <audio id="typingSound" src="typing.mp3"></audio>
 
-<div id="galleryOverlay" class="overlay" onclick="nextPhoto()">
-  <img id="galleryImg" src="">
-  <p style="position:absolute; bottom:20px; color:white; font-weight:bold;">
-    Tap untuk foto selanjutnya... ✨
-  </p>
-</div>
-
-<!-- PAGE 1 -->
-<section id="page-1" style="display:flex">
-  <img src="gift.png" class="gift-img" onclick="openGift()" alt="Birthday Gift">
+<!-- OPENING -->
+<section id="opening" class="active opening">
+  <img src="gift.png" class="gift-img" onclick="enterMain()">
   <h1>TAP KADO NYA 💖</h1>
 </section>
 
-<!-- MENU -->
-<section id="page-menu">
+<!-- MAIN APP -->
+<section id="menu">
   <h1>Happy Birthday Eli 🎂</h1>
   <p>Ada kejutan kecil buat kamu hari ini...</p>
-  <button class="btn-main" onclick="showPage('page-feel')">🎁 Buka Hadiah</button>
-  <button onclick="startBomb()">💣 Main Game Sebentar</button>
+  <button class="btn-main" onclick="showPage('feel')">🎁 Buka Hadiah</button>
+  <button onclick="startGame()">💣 Main Game</button>
 </section>
 
-<!-- FEEL -->
-<section id="page-feel">
-  <h1>Halo Eli... 🤍</h1>
-  <p>Sebelum lanjut, aku mau tanya...<br>Hari ini kamu ngerasa disayang gak?</p>
-  <button class="btn-main" onclick="showGift()">💖 Iya, disayang banget!</button>
-  <button onclick="showGift()">🤍 Belum terlalu...</button>
+<section id="feel">
+  <h1>Halo Eli 🤍</h1>
+  <p>Hari ini kamu ngerasa disayang gak?</p>
+  <button class="btn-main" onclick="showGift()">💖 Iya</button>
+  <button onclick="showGift()">🤍 Belum</button>
 </section>
 
-<!-- GAME -->
-<section id="page-bomb">
+<section id="game">
   <h1>Hati-hati 💣</h1>
-  <p>Cari kotak yang aman ya!</p>
   <div class="grid" id="bombGrid"></div>
-  <button onclick="showPage('page-menu')" style="background:#bbb">Nyerah & Balik</button>
 </section>
 
-<!-- GIFT -->
-<section id="page-gift">
+<section id="gift">
   <img src="eli.jpg" class="photo">
-  <div id="surat-box">
-    <div id="surat-text"></div>
-  </div>
-  <button id="memories-btn" onclick="startGallery()">📸 Lihat Kenangan Kita</button>
-  <button class="btn-main" style="margin-top:20px" onclick="waClose()">
-    Boleh aku nemenin kamu hari ini? 🤍
-  </button>
+  <div id="surat-box"><div id="surat-text"></div></div>
+  <button class="btn-main" onclick="waClose()">Boleh aku nemenin kamu? 🤍</button>
 </section>
 
 <script>
-const pages = document.querySelectorAll("section");
 const bgm = document.getElementById("bgm");
 const typingSound = document.getElementById("typingSound");
 const nomorWA = "6283129486122";
 
-const myPhotos = ["foto1.jpg", "foto2.jpg", "foto3.jpg"];
-let currentPhotoIdx = 0;
-
-function showPage(id){
-  pages.forEach(p => p.style.display = "none");
-  document.getElementById(id).style.display = "flex";
-  window.scrollTo(0,0);
-}
-
-function openGift(){
+function enterMain(){
   bgm.volume = .4;
   bgm.play().catch(()=>{});
-  showPage("page-menu");
+  document.getElementById("opening").classList.remove("active");
+  showPage("menu");
 }
 
-function startBomb(){
-  showPage("page-bomb");
+function showPage(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function startGame(){
+  showPage("game");
   const grid = document.getElementById("bombGrid");
-  grid.innerHTML = "";
-  const bombPos = Math.floor(Math.random() * 25);
+  grid.innerHTML="";
+  const bomb = Math.floor(Math.random()*25);
 
   for(let i=0;i<25;i++){
-    const c = document.createElement("div");
-    c.className = "cell";
-    c.onclick = () => {
-      if(i === bombPos){
-        c.textContent = "💣";
-        c.style.background = "#333";
-        setTimeout(()=>{
-          alert("Yahhh kena bom! 😜");
-          location.href = `https://wa.me/${nomorWA}?text=Aku kalah main bom 🙈💖`;
-        },500);
+    const c=document.createElement("div");
+    c.className="cell";
+    c.onclick=()=>{
+      if(i===bomb){
+        c.textContent="💣";
+        setTimeout(()=>location.href=`https://wa.me/${nomorWA}`,500);
       } else {
-        c.textContent = "💖";
-        c.style.background = "#ffe4ec";
+        c.textContent="💖";
       }
     };
     grid.appendChild(c);
@@ -279,61 +177,31 @@ function startBomb(){
 }
 
 function showGift(){
-  showPage("page-gift");
-  document.getElementById("memories-btn").style.display = "none";
-  const text =
-`Selamat ulang tahun ya Eli 🤍
+  showPage("gift");
+  const text=`Selamat ulang tahun Eli 🤍
 
-Hari ini bukan cuma soal umur kamu yang nambah,
-tapi tentang betapa bersyukurnya aku karena kamu ada.
-
-Aku tau aku belum sempurna,
-tapi aku bener-bener sayang kamu dengan caraku sendiri.
-
-Semoga kamu lebih sering ngerasa tenang,
-dicintai, dan gak sendirian.
-
-Aku ada di sini. Selalu.`;
-
-  type(text, 50);
+Terima kasih sudah ada.
+Aku bener-bener sayang kamu.`;
+  type(text,50);
 }
 
-function type(text, speed){
-  const el = document.getElementById("surat-text");
-  el.innerHTML = "";
-  let i = 0;
-
+function type(text,speed){
+  const el=document.getElementById("surat-text");
+  el.innerHTML="";
+  let i=0;
   function run(){
-    if(i < text.length){
-      el.innerHTML += text[i] === "\n" ? "<br>" : text[i];
-      typingSound.currentTime = 0;
+    if(i<text.length){
+      el.innerHTML+=text[i]==="\n"?"<br>":text[i];
+      typingSound.currentTime=0;
       typingSound.play().catch(()=>{});
-      i++;
-      setTimeout(run, speed);
-    } else {
-      document.getElementById("memories-btn").style.display = "block";
+      i++; setTimeout(run,speed);
     }
   }
   run();
 }
 
-function startGallery(){
-  currentPhotoIdx = 0;
-  document.getElementById("galleryImg").src = myPhotos[currentPhotoIdx];
-  document.getElementById("galleryOverlay").style.display = "flex";
-}
-
-function nextPhoto(){
-  currentPhotoIdx++;
-  if(currentPhotoIdx < myPhotos.length){
-    document.getElementById("galleryImg").src = myPhotos[currentPhotoIdx];
-  } else {
-    document.getElementById("galleryOverlay").style.display = "none";
-  }
-}
-
 function waClose(){
-  location.href = `https://wa.me/${nomorWA}?text=Boleh 🤍`;
+  location.href=`https://wa.me/${nomorWA}?text=Boleh 🤍`;
 }
 </script>
 
