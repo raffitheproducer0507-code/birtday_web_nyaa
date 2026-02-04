@@ -1,178 +1,341 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Birthday Eli 💖</title>
-    <style>
-        :root { --pink-m: #ff4d6d; --pink-s: #ff8fab; --bg-grad: linear-gradient(135deg, #ffc1d9, #ffe4ec); }
-        * { box-sizing: border-box; font-family: 'Arial', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { margin: 0; background: var(--bg-grad); display: flex; justify-content: center; align-items: center; min-height: 100vh; width: 100vw; overflow: hidden; position: relative; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy Birthday Eli 💖</title>
 
-        /* Background Stars */
-        .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-        .star { position: absolute; color: white; opacity: 0.6; animation: fall linear infinite; }
-        @keyframes fall { from { transform: translateY(-10vh) rotate(0); opacity: 1; } to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+<style>
+:root {
+  --pink-main: #ff4d6d;
+  --pink-soft: #ff8fab;
+  --bg-grad: linear-gradient(135deg, #ffc1d9, #ffe4ec);
+}
 
-        /* Container Glassmorphism */
-        section {
-            display: none; flex-direction: column; align-items: center; text-align: center;
-            padding: 25px; width: 92%; max-width: 420px; min-height: 480px;
-            background: rgba(255, 255, 255, 0.55); backdrop-filter: blur(12px);
-            border-radius: 30px; border: 2px solid rgba(255,255,255,0.8);
-            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2); z-index: 10;
-        }
-        .active { display: flex; animation: zoomIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        @keyframes zoomIn { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
 
-        .cat-img { width: 130px; height: 130px; margin-bottom: 15px; border-radius: 15px; }
-        h1 { color: var(--pink-m); font-size: 1.7rem; margin-bottom: 10px; text-shadow: 1px 1px 0 white; }
-        p { font-size: 1.05rem; font-weight: 700; color: #555; line-height: 1.4; margin-bottom: 15px; }
+body {
+  margin: 0;
+  background: var(--bg-grad);
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
 
-        button {
-            padding: 16px; border-radius: 50px; border: none; background: white; color: var(--pink-m);
-            font-weight: 800; font-size: 1rem; width: 100%; max-width: 280px; margin-bottom: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: pointer; transition: 0.2s;
-        }
-        button:active { transform: scale(0.95); background: var(--pink-s); color: white; }
-        .btn-main { background: var(--pink-m); color: white; }
+/* PAGE */
+section {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px 20px;
+  width: 100%;
+  min-height: 100vh;
+  animation: fadeIn .5s ease;
+}
 
-        /* Game Grid */
-        .grid { display: grid; gap: 8px; grid-template-columns: repeat(5, 1fr); margin: 15px 0; width: 100%; }
-        .cell { aspect-ratio: 1; background: rgba(255,255,255,0.8); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
 
-        /* Surat Box */
-        #surat-box { text-align: left; line-height: 1.6; font-size: 0.95rem; font-weight: 600; color: #333; max-height: 280px; overflow-y: auto; padding-right: 5px; }
-        #surat-box::-webkit-scrollbar { width: 4px; }
-        #surat-box::-webkit-scrollbar-thumb { background: var(--pink-s); border-radius: 10px; }
-        .photo-final { width: 100px; height: 100px; border-radius: 50%; border: 4px solid white; object-fit: cover; margin-bottom: 10px; }
-    </style>
+/* TEXT */
+h1 {
+  color: var(--pink-main);
+  font-size: 2.4rem;
+  margin-bottom: 16px;
+  text-shadow: 2px 2px 0 white;
+}
+
+p {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #444;
+  line-height: 1.4;
+}
+
+/* BUTTON */
+button {
+  padding: 20px;
+  border-radius: 50px;
+  border: none;
+  background: var(--pink-soft);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.3rem;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 14px;
+  box-shadow: 0 5px 15px rgba(255,143,171,.4);
+  cursor: pointer;
+}
+
+button:active { transform: scale(.95); }
+.btn-main { background: var(--pink-main); }
+
+/* GIFT IMAGE */
+.gift-img {
+  width: 180px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  animation: floatGift 2.5s ease-in-out infinite;
+  transition: transform .3s ease;
+  filter: drop-shadow(0 10px 20px rgba(255, 77, 109, 0.4));
+}
+
+.gift-img:hover {
+  transform: scale(1.08);
+}
+
+@keyframes floatGift {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+  100% { transform: translateY(0); }
+}
+
+/* GAME */
+.grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 20px 0;
+  width: 100%;
+  max-width: 400px;
+}
+
+.cell {
+  aspect-ratio: 1;
+  background: #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 0 #ddd;
+}
+
+/* GIFT PAGE */
+.photo {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 8px solid #fff;
+  object-fit: cover;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+#surat-box {
+  background: rgba(255,255,255,.95);
+  padding: 26px;
+  border-radius: 25px;
+  max-width: 520px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+#surat-text {
+  text-align: left;
+  line-height: 1.8;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* GALLERY */
+#memories-btn {
+  display: none;
+  background: #6a0572;
+  margin-top: 10px;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay img {
+  max-width: 90%;
+  max-height: 80%;
+  border: 5px solid white;
+  border-radius: 10px;
+}
+</style>
 </head>
+
 <body>
 
-    <div class="stars" id="starContainer"></div>
-    <audio id="bgm" src="sky.mp3" loop></audio>
+<audio id="bgm" src="sky.mp3" loop></audio>
+<audio id="typingSound" src="typing.mp3"></audio>
 
-    <section id="p1" class="active">
-        <img src="https://media.tenor.com/7p48-q3t-d8AAAAAi/tkthao219-bubududu.gif" class="cat-img">
-        <h1>Ada kado buat Eli! 🎁</h1>
-        <p>Coba diklik dulu tombolnya...</p>
-        <button class="btn-main" onclick="startStory()">Buka Kado</button>
-    </section>
+<div id="galleryOverlay" class="overlay" onclick="nextPhoto()">
+  <img id="galleryImg" src="">
+  <p style="position:absolute; bottom:20px; color:white; font-weight:bold;">
+    Tap untuk foto selanjutnya... ✨
+  </p>
+</div>
 
-    <section id="p2">
-        <img src="https://media.tenor.com/vH_fM4YpG98AAAAAi/tkthao219-bubududu.gif" class="cat-img">
-        <h1>Eh bentar... ✋</h1>
-        <p>Sebelum dibuka, kamu tau gak hari ini hari apa?</p>
-        <button class="btn-main" onclick="showPage('p3')">Hari biasa aja</button>
-        <button onclick="showPage('p3')">Hari spesial dong!</button>
-    </section>
+<!-- PAGE 1 -->
+<section id="page-1" style="display:flex">
+  <img src="gift.png" class="gift-img" onclick="openGift()" alt="Birthday Gift">
+  <h1>TAP KADO NYA 💖</h1>
+</section>
 
-    <section id="p3">
-        <img src="https://media.tenor.com/7p48-q3t-d8AAAAAi/tkthao219-bubududu.gif" class="cat-img">
-        <h1>Bener banget! 🥳</h1>
-        <p>Hari ini kan hari ulang tahun orang paling cantik sedunia...</p>
-        <button class="btn-main" onclick="showPage('p4')">Siapa tuh? 🤔</button>
-    </section>
+<!-- MENU -->
+<section id="page-menu">
+  <h1>Happy Birthday Eli 🎂</h1>
+  <p>Ada kejutan kecil buat kamu hari ini...</p>
+  <button class="btn-main" onclick="showPage('page-feel')">🎁 Buka Hadiah</button>
+  <button onclick="startBomb()">💣 Main Game Sebentar</button>
+</section>
 
-    <section id="p4">
-        <img src="https://media.tenor.com/Z8XW8GfWp7AAAAAi/tkthao219-bubududu.gif" class="cat-img">
-        <h1>Ya kamu lah, Eli! 💖</h1>
-        <p>Mau dapet hadiahnya sekarang?</p>
-        <button class="btn-main" onclick="initGame()">Mau dong! ✨</button>
-    </section>
+<!-- FEEL -->
+<section id="page-feel">
+  <h1>Halo Eli... 🤍</h1>
+  <p>Sebelum lanjut, aku mau tanya...<br>Hari ini kamu ngerasa disayang gak?</p>
+  <button class="btn-main" onclick="showGift()">💖 Iya, disayang banget!</button>
+  <button onclick="showGift()">🤍 Belum terlalu...</button>
+</section>
 
-    <section id="p-game">
-        <p>Cari 3 hati (💖) buat buka kado. Awas kena BOM! 💣</p>
-        <div class="grid" id="bombGrid"></div>
-    </section>
+<!-- GAME -->
+<section id="page-bomb">
+  <h1>Hati-hati 💣</h1>
+  <p>Cari kotak yang aman ya!</p>
+  <div class="grid" id="bombGrid"></div>
+  <button onclick="showPage('page-menu')" style="background:#bbb">Nyerah & Balik</button>
+</section>
 
-    <section id="p-final">
-        <img src="eli.jpg" class="photo-final" onerror="this.src='https://media.tenor.com/Z8XW8GfWp7AAAAAi/tkthao219-bubududu.gif'">
-        <div id="surat-box"><div id="surat-text"></div></div>
-        <button id="wa-btn" class="btn-main" style="display:none; margin-top:20px;" onclick="waClose()">So, what are your orders? ✨</button>
-    </section>
+<!-- GIFT -->
+<section id="page-gift">
+  <img src="eli.jpg" class="photo">
+  <div id="surat-box">
+    <div id="surat-text"></div>
+  </div>
+  <button id="memories-btn" onclick="startGallery()">📸 Lihat Kenangan Kita</button>
+  <button class="btn-main" style="margin-top:20px" onclick="waClose()">
+    Boleh aku nemenin kamu hari ini? 🤍
+  </button>
+</section>
 
-    <script>
-        const nomorWA = "6283129486122";
+<script>
+const pages = document.querySelectorAll("section");
+const bgm = document.getElementById("bgm");
+const typingSound = document.getElementById("typingSound");
+const nomorWA = "6283129486122";
 
-        function showPage(id) {
-            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-        }
+const myPhotos = ["foto1.jpg", "foto2.jpg", "foto3.jpg"];
+let currentPhotoIdx = 0;
 
-        function startStory() {
-            document.getElementById('bgm').play().catch(()=>{});
-            showPage('p2');
-        }
+function showPage(id){
+  pages.forEach(p => p.style.display = "none");
+  document.getElementById(id).style.display = "flex";
+  window.scrollTo(0,0);
+}
 
-        function initGame() {
-            showPage('p-game');
-            const grid = document.getElementById('bombGrid');
-            grid.innerHTML = '';
-            let found = 0;
-            const bomb = Math.floor(Math.random() * 25);
+function openGift(){
+  bgm.volume = .4;
+  bgm.play().catch(()=>{});
+  showPage("page-menu");
+}
 
-            for(let i=0; i<25; i++) {
-                const c = document.createElement('div');
-                c.className = 'cell';
-                c.onclick = () => {
-                    if(i === bomb) {
-                        c.textContent = '💣';
-                        setTimeout(() => {
-                            alert('DUARRR! 💣 Kamu kalah! Kirim 3 PAP lucu ke aku sekarang! 😜');
-                            location.href = `https://wa.me/${nomorWA}?text=Aku kena bom sayang, ini 3 PAP lucu aku sesuai janji 🙈💖`;
-                        }, 500);
-                    } else if(c.textContent !== '💖') {
-                        c.textContent = '💖';
-                        c.style.background = '#ffe4ec';
-                        if(++found === 3) {
-                            setTimeout(() => { showFinal(); }, 500);
-                        }
-                    }
-                };
-                grid.appendChild(c);
-            }
-        }
+function startBomb(){
+  showPage("page-bomb");
+  const grid = document.getElementById("bombGrid");
+  grid.innerHTML = "";
+  const bombPos = Math.floor(Math.random() * 25);
 
-        function showFinal() {
-            showPage('p-final');
-            const text = "Di hari ini,\nhari di mana semesta seolah ikut berhenti sejenak untukmu,\naku ingin kamu tahu satu hal sederhana:\nkehadiranmu adalah hal paling indah yang pernah menetap di hidupku.\n\nAku ingin kamu jujur padaku,\nbukan karena aku sempurna,\ntapi justru karena aku ingin belajar.\n\nJika aku salah, marahlah…\nlalu jelaskan padaku,\nkarena aku ingin mengerti, bukan sekadar dicintai.\n\nMelihatmu bahagia di hari yang penting ini\nadalah kebahagiaan yang tak bisa kujelaskan dengan kata-kata.\n\nHari ini bukan tentang siapa pun selain dirimu.\nDi hari istimewa ini,\njadilah karakter utama.\nKatakan apa pun yang kamu inginkan,\nminta apa pun yang kamu butuhkan.\n\nSo, my heroine…\nwhat are your orders? ✨";
-            type(text, 55);
-        }
+  for(let i=0;i<25;i++){
+    const c = document.createElement("div");
+    c.className = "cell";
+    c.onclick = () => {
+      if(i === bombPos){
+        c.textContent = "💣";
+        c.style.background = "#333";
+        setTimeout(()=>{
+          alert("Yahhh kena bom! 😜");
+          location.href = `https://wa.me/${nomorWA}?text=Aku kalah main bom 🙈💖`;
+        },500);
+      } else {
+        c.textContent = "💖";
+        c.style.background = "#ffe4ec";
+      }
+    };
+    grid.appendChild(c);
+  }
+}
 
-        function type(t, s) {
-            const el = document.getElementById('surat-text');
-            let i = 0;
-            function run() {
-                if(i < t.length) {
-                    el.innerHTML += t[i] === "\n" ? "<br>" : t[i];
-                    i++;
-                    const box = document.getElementById('surat-box');
-                    box.scrollTop = box.scrollHeight;
-                    setTimeout(run, s);
-                } else {
-                    document.getElementById('wa-btn').style.display = 'block';
-                }
-            }
-            run();
-        }
+function showGift(){
+  showPage("page-gift");
+  document.getElementById("memories-btn").style.display = "none";
+  const text =
+`Selamat ulang tahun ya Eli 🤍
 
-        function waClose() {
-            const pesan = "So, my MC... I have a main quest for you. Your first task is... 💖";
-            location.href = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
-        }
+Hari ini bukan cuma soal umur kamu yang nambah,
+tapi tentang betapa bersyukurnya aku karena kamu ada.
 
-        // Animasi Bintang Jatuh
-        const sc = document.getElementById('starContainer');
-        for(let i=0; i<25; i++) {
-            const s = document.createElement('div');
-            s.className = 'star'; s.innerHTML = '✨';
-            s.style.left = Math.random() * 100 + 'vw';
-            s.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            s.style.fontSize = (Math.random() * 15 + 10) + 'px';
-            sc.appendChild(s);
-        }
-    </script>
+Aku tau aku belum sempurna,
+tapi aku bener-bener sayang kamu dengan caraku sendiri.
+
+Semoga kamu lebih sering ngerasa tenang,
+dicintai, dan gak sendirian.
+
+Aku ada di sini. Selalu.`;
+
+  type(text, 50);
+}
+
+function type(text, speed){
+  const el = document.getElementById("surat-text");
+  el.innerHTML = "";
+  let i = 0;
+
+  function run(){
+    if(i < text.length){
+      el.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+      typingSound.currentTime = 0;
+      typingSound.play().catch(()=>{});
+      i++;
+      setTimeout(run, speed);
+    } else {
+      document.getElementById("memories-btn").style.display = "block";
+    }
+  }
+  run();
+}
+
+function startGallery(){
+  currentPhotoIdx = 0;
+  document.getElementById("galleryImg").src = myPhotos[currentPhotoIdx];
+  document.getElementById("galleryOverlay").style.display = "flex";
+}
+
+function nextPhoto(){
+  currentPhotoIdx++;
+  if(currentPhotoIdx < myPhotos.length){
+    document.getElementById("galleryImg").src = myPhotos[currentPhotoIdx];
+  } else {
+    document.getElementById("galleryOverlay").style.display = "none";
+  }
+}
+
+function waClose(){
+  location.href = `https://wa.me/${nomorWA}?text=Boleh 🤍`;
+}
+</script>
+
 </body>
 </html>
