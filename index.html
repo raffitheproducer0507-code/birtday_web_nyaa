@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy Birthday Eli 💖</title>
+
+<style>
+:root {
+  --pink-main: #ff4d6d;
+  --pink-soft: #ff8fab;
+  --bg-grad: linear-gradient(135deg, #ffc1d9, #ffe4ec);
+}
+
+* { box-sizing: border-box; font-family: 'Arial', sans-serif; -webkit-tap-highlight-color: transparent; }
+
+body { 
+  margin: 0;
+  background: var(--bg-grad); 
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden; /* FIX */
+}
+
+/* --- ANIMASI LATAR --- */
+.stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.star { position: absolute; opacity: 0.6; animation: fall linear infinite; }
+@keyframes fall {
+  from { transform: translateY(-10vh) rotate(0); opacity: 1; }
+  to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* --- CONTAINER --- */
+section {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 25px;
+  width: 92%;
+  max-width: 420px;
+  min-height: 80vh; /* FIX */
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px);
+  border-radius: 30px;
+  border: 2px solid rgba(255,255,255,0.8);
+  box-shadow: 0 15px 35px rgba(255,77,109,0.2);
+  position: absolute;
+  z-index: 10;
+}
+
+.fade-in { 
+  display: flex; 
+  animation: zoomIn .6s cubic-bezier(.175,.885,.32,1.275); 
+}
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.cat-img { width: 130px; height: 130px; border-radius: 15px; margin-bottom: 10px; }
+h1 { color: var(--pink-main); font-size: 1.7rem; margin-bottom: 10px; }
+p { font-size: 1.05rem; font-weight: 700; color: #555; line-height: 1.4; }
+
+button {
+  padding: 16px;
+  border-radius: 50px;
+  border: none;
+  width: 100%;
+  max-width: 280px;
+  font-weight: 800;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  background: white;
+  color: var(--pink-main);
+  cursor: pointer;
+}
+button:active { transform: scale(.95); background: var(--pink-soft); color: white; }
+.btn-main { background: var(--pink-main); color: white; }
+
+.grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; width: 100%; margin: 15px 0; }
+.cell { aspect-ratio: 1; background: rgba(255,255,255,.8); border-radius: 8px; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+
+#surat-box {
+  text-align: left;
+  line-height: 1.5;
+  font-size: .95rem;
+  font-weight: 600;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.photo { width: 100px; height: 100px; border-radius: 50%; border: 4px solid white; margin-bottom: 10px; }
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,.9); display: none; justify-content: center; align-items: center; z-index: 1000; }
+.overlay img { max-width: 85%; border-radius: 10px; border: 4px solid white; }
+
+/* FIX: halaman awal pasti tampil */
+#p1 { display: flex; }
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="starContainer"></div>
+<audio id="bgm" src="sky.mp3" loop></audio>
+<audio id="typingSound" src="typing.mp3"></audio>
+
+<section id="p1" class="fade-in">
+  <img src="https://media.tenor.com/7p48-q3t-d8AAAAAi/tkthao219-bubududu.gif" class="cat-img">
+  <h1>Ada kado buat kamu!</h1>
+  <p>Coba di klik dulu kadonya 💖</p>
+  <button class="btn-main" onclick="startStory()">Buka Kado 🎁</button>
+</section>
+
+<section id="p2">
+  <img src="https://media.tenor.com/vH_fM4YpG98AAAAAi/tkthao219-bubududu.gif" class="cat-img">
+  <h1>Eh bentar... ✋</h1>
+  <p>Sebelum dibuka, kamu tau gak hari ini hari apa?</p>
+  <button class="btn-main" onclick="nextPart('p3')">Hari biasa aja</button>
+  <button onclick="nextPart('p3')">Hari spesial dong!</button>
+</section>
+
+<section id="p3">
+  <img src="https://media.tenor.com/7p48-q3t-d8AAAAAi/tkthao219-bubududu.gif" class="cat-img">
+  <h1>Bener banget! 🥳</h1>
+  <p>Hari ini kan hari ulang tahun orang paling cantik sedunia...</p>
+  <button class="btn-main" onclick="nextPart('p4')">Siapa tuh? 🤔</button>
+</section>
+
+<section id="p4">
+  <img src="https://media.tenor.com/Z8XW8GfWp7AAAAAi/tkthao219-bubududu.gif" class="cat-img">
+  <h1>Ya kamu lah, Eli! 💖</h1>
+  <p>Mau dapet hadiahnya sekarang?</p>
+  <button class="btn-main" onclick="initGamePage()">Mau dong! ✨</button>
+</section>
+
+<section id="p-game">
+  <p>Temukan 3 hati buat buka kadonya. Awas kena BOM! 💣</p>
+  <div class="grid" id="bombGrid"></div>
+</section>
+
+<section id="p-final">
+  <img src="eli.jpg" class="photo">
+  <div id="surat-box"><div id="surat-text"></div></div>
+  <button id="wa-btn" class="btn-main" style="display:none" onclick="waClose()">So, what are your orders? ✨</button>
+</section>
+
+<script>
+const nomorWA = "6283129486122";
+
+document.getElementById("typingSound").volume = 0.25; // FIX volume
+
+function showPage(id){
+  document.querySelectorAll("section").forEach(s => s.classList.remove("fade-in"));
+  document.getElementById(id).classList.add("fade-in");
+}
+
+function startStory(){
+  document.getElementById("bgm").play().catch(()=>{});
+  showPage("p2");
+}
+
+function nextPart(id){ showPage(id); }
+
+function initGamePage(){
+  showPage("p-game");
+  const grid = document.getElementById("bombGrid");
+  grid.innerHTML = "";
+  let found = 0;
+  const bomb = Math.floor(Math.random()*25);
+
+  for(let i=0;i<25;i++){
+    const c=document.createElement("div");
+    c.className="cell";
+    c.onclick=()=>{
+      if(i===bomb){
+        c.textContent="💣";
+        setTimeout(()=>location.href=`https://wa.me/${nomorWA}`,600);
+      } else {
+        c.textContent="💖";
+        if(++found===3) showFinal();
+      }
+    };
+    grid.appendChild(c);
+  }
+}
+
+function showFinal(){
+  showPage("p-final");
+  const t=`Di hari ini,
+hari di mana semesta berhenti sejenak untukmu,
+aku ingin kamu tahu satu hal sederhana:
+kehadiranmu adalah hal terindah di hidupku.
+
+So, my heroine…
+what are your orders? ✨`;
+  type(t,50);
+}
+
+function type(text,speed){
+  const el=document.getElementById("surat-text");
+  let i=0;
+  (function run(){
+    if(i<text.length){
+      el.innerHTML+=text[i]=="\n"?"<br>":text[i++];
+      setTimeout(run,speed);
+    } else document.getElementById("wa-btn").style.display="block";
+  })();
+}
+
+function waClose(){
+  location.href=`https://wa.me/${nomorWA}?text=So my heroine... 💖`;
+}
+</script>
+</body>
+</html>
